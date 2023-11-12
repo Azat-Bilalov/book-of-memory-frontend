@@ -1,0 +1,26 @@
+$border-radius: 18px;
+$space-xl: 24px;
+$text-primary: #000000;
+$text-secondary: #9e9e9e;
+
+.text-input {
+  display: flex;
+  align-self: center;
+  border-radius: $border-radius;
+  background: rgba(0, 0, 0, 0.1);
+  padding-left: $space-xl;
+  height: 56px;
+  width: 100%;
+}
+
+.text-input-field {
+  color: $text-primary;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+}
+
+.text-input-field::placeholder {
+  color: $text-secondary;
+}

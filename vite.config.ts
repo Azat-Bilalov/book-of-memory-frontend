@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/book-of-memory/",
+  base: "/book-of-memory-frontend/",
   css: {
     modules: {
       localsConvention: "camelCase",

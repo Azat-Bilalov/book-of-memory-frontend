@@ -25,7 +25,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           <h4 className="card-title h4-sm">{document.title}</h4>
           <p className="card-text">{document.description}</p>
           <Link
-            to={`/document/${document.id}`}
+            to={`/book-of-memory-frontend/document/${document.id}`}
             className="btn btn-outline-primary"
           >
             Подробнее
@@ -38,7 +38,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           <Card.Title>{document.title}</Card.Title>
           <Card.Text>{document.description}</Card.Text>
           <Link
-            to={`/document/${document.id}`}
+            to={`/book-of-memory-frontend/document/${document.id}`}
             className="btn btn-outline-primary"
           >
             Подробнее

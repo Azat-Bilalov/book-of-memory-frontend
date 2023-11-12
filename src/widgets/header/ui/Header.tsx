@@ -12,7 +12,7 @@ export const Header = () => {
       <Navbar data-bs-theme="dark" className={s.navbar}>
         <Container>
           <Navbar.Brand
-            href="/"
+            href="/book-of-memory-frontend/"
             className="text-light d-flex align-center gap-2"
           >
             <img
@@ -27,8 +27,12 @@ export const Header = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto">
               <Nav.Link
-                href="/"
-                className={location.pathname === "/" ? "active" : ""}
+                href="/book-of-memory-frontend/"
+                className={
+                  location.pathname === "/book-of-memory-frontend/"
+                    ? "active"
+                    : ""
+                }
               >
                 Документы
               </Nav.Link>

@@ -9,11 +9,11 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: "/",
+        path: "/book-of-memory-frontend",
         element: <DocumentListPage />,
       },
       {
-        path: "/document/:id",
+        path: "/book-of-memory-frontend/document/:id",
         element: <DocumentDetailedPage />,
       },
     ],

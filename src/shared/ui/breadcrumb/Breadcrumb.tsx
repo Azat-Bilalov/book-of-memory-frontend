@@ -4,7 +4,7 @@ import { Breadcrumb as BootstrapBreadcrumb } from "react-bootstrap";
 interface BreadcrumbProps {
   items: { text: string; href?: string; active?: boolean }[];
 }
-
+// переписать
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   return (
     <BootstrapBreadcrumb>

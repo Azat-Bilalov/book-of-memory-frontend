@@ -1,9 +1,9 @@
 import React from "react";
 import { DocumentCard } from "../document-card";
-import { DocumentModel } from "../../models";
+import { Document } from "../../model";
 
 interface DocumentListProps {
-  documents: DocumentModel[];
+  documents: Document[];
 }
 
 const DocumentList: React.FC<DocumentListProps> = ({ documents }) => {

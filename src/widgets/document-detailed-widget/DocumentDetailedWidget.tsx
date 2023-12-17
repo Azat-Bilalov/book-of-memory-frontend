@@ -1,25 +1,27 @@
-import React from "react";
-import { DocumentModel } from "@/entities/document/models";
-import { fetchDocument } from "@/entities/document/api";
 import { Button, Container } from "react-bootstrap";
 import Breadcrumb from "@/shared/ui/breadcrumb";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import {
+  useAddDocumentToBindingMutation,
+  useGetDocumentQuery,
+} from "@/entities/document/api";
+import { capitalize } from "@/shared/lib";
 
 export const DocumentDetailedWidget = () => {
-  const [document, setDocument] = React.useState<DocumentModel | null>(null);
   const { id } = useParams<{ id: string }>();
+  const { data: document, isLoading } = useGetDocumentQuery(id!);
+  const [addDocumentToBinding, { isSuccess, error }] =
+    useAddDocumentToBindingMutation();
 
-  React.useEffect(() => {
-    if (!id) return;
-    fetchDocument(id).then((document) => {
-      setDocument(document);
-    });
-  }, [id]);
+  const handleAddToOrder = () => {
+    addDocumentToBinding(id!);
+  };
 
   if (!document) return null;
 
   return (
     <Container className="d-grid gap-4" style={{ marginTop: "60px" }}>
+      {isLoading && <p>Загрузка...</p>}
       <Breadcrumb
         items={[
           { text: "Документы", href: "/book-of-memory-frontend/" },
@@ -40,9 +42,22 @@ export const DocumentDetailedWidget = () => {
         />
         <div className="d-flex flex-column justify-content-center align-items-center">
           <p className="text-center">{document?.description}</p>
-          <Button variant="outline-success" className="w-100">
-            Подать заявку
+          <Button
+            variant="outline-success"
+            className="w-100"
+            onClick={handleAddToOrder}
+          >
+            Добавить в корзину
           </Button>
+          {isSuccess && (
+            <p className="text-success">
+              Документ добавлен в{" "}
+              <Link to="/book-of-memory-frontend/basket">корзину</Link>
+            </p>
+          )}
+          {error && "data" in error && (
+            <p className="text-danger">{capitalize(error.data as string)}</p>
+          )}
         </div>
       </div>
     </Container>

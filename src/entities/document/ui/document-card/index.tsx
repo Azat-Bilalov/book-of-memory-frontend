@@ -1,11 +1,11 @@
 import cn from "classnames";
-import { DocumentModel } from "../../models";
+import { Document } from "../../model";
 import { API_URL } from "@/shared/config";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export type DocumentCardProps = {
-  document: DocumentModel;
+  document: Document;
   className?: string;
 };
 

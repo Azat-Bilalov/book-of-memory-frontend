@@ -6,5 +6,7 @@ export const normalizeSession = (sessionDto: SessionDto): Session => {
     accessToken: sessionDto.access_token,
     isAuthorized: true,
     role: sessionDto.role,
+    firstName: sessionDto.first_name,
+    lastName: sessionDto.last_name,
   };
 };

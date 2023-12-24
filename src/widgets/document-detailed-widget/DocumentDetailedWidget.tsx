@@ -1,21 +1,11 @@
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Breadcrumb from "@/shared/ui/breadcrumb";
-import { Link, useParams } from "react-router-dom";
-import {
-  useAddDocumentToBindingMutation,
-  useGetDocumentQuery,
-} from "@/entities/document/api";
-import { capitalize } from "@/shared/lib";
+import { useParams } from "react-router-dom";
+import { useGetDocumentQuery } from "@/entities/document/api";
 
 export const DocumentDetailedWidget = () => {
   const { id } = useParams<{ id: string }>();
   const { data: document, isLoading } = useGetDocumentQuery(id!);
-  const [addDocumentToBinding, { isSuccess, error }] =
-    useAddDocumentToBindingMutation();
-
-  const handleAddToOrder = () => {
-    addDocumentToBinding(id!);
-  };
 
   if (!document) return null;
 
@@ -42,22 +32,6 @@ export const DocumentDetailedWidget = () => {
         />
         <div className="d-flex flex-column justify-content-center align-items-center">
           <p className="text-center">{document?.description}</p>
-          <Button
-            variant="outline-success"
-            className="w-100"
-            onClick={handleAddToOrder}
-          >
-            Добавить в корзину
-          </Button>
-          {isSuccess && (
-            <p className="text-success">
-              Документ добавлен в{" "}
-              <Link to="/book-of-memory-frontend/basket">корзину</Link>
-            </p>
-          )}
-          {error && "data" in error && (
-            <p className="text-danger">{capitalize(error.data as string)}</p>
-          )}
         </div>
       </div>
     </Container>

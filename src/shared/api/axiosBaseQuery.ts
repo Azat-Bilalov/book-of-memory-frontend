@@ -35,6 +35,12 @@ export const axiosBaseQuery =
       return { data: result.data };
     } catch (axiosError) {
       const err = axiosError as AxiosError;
+
+      if (err.response?.status === 401) {
+        localStorage.removeItem("session");
+        window.location.reload();
+      }
+
       return {
         error: {
           status: err.response?.status,

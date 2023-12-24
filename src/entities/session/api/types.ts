@@ -5,6 +5,8 @@ export type SessionDto = {
   expires_in: number;
   token_type: string;
   role: Role;
+  first_name: string;
+  last_name: string;
 };
 
 export type RequestLoginBody = {

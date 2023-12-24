@@ -1,19 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { sessionApi } from "../api";
-import { RootState } from "@/app/store";
-import { Role } from "./types";
-
-type SessionSliceState =
-  | {
-      accessToken: string;
-      isAuthorized: true;
-      role: Role;
-    }
-  | {
-      isAuthorized: false;
-      accessToken?: string;
-      role?: Role;
-    };
+import { SessionSliceState } from "./types";
 
 const storedSession = localStorage.getItem("session");
 const initialState: SessionSliceState = storedSession
@@ -39,9 +26,17 @@ export const sessionSlice = createSlice({
         state.isAuthorized = true;
 
         // say TypeScript that isAuthorized = true
-        if (state.isAuthorized && payload.accessToken && payload.role) {
+        if (
+          state.isAuthorized &&
+          payload.accessToken &&
+          payload.role &&
+          payload.firstName &&
+          payload.lastName
+        ) {
           state.accessToken = payload.accessToken;
           state.role = payload.role;
+          state.firstName = payload.firstName;
+          state.lastName = payload.lastName;
 
           // save session to localStorage
           localStorage.setItem("session", JSON.stringify(state));
@@ -65,9 +60,17 @@ export const sessionSlice = createSlice({
         state.isAuthorized = true;
 
         // say TypeScript that isAuthorized = true
-        if (state.isAuthorized && payload.accessToken && payload.role) {
+        if (
+          state.isAuthorized &&
+          payload.accessToken &&
+          payload.role &&
+          payload.firstName &&
+          payload.lastName
+        ) {
           state.accessToken = payload.accessToken;
           state.role = payload.role;
+          state.firstName = payload.firstName;
+          state.lastName = payload.lastName;
 
           // save session to localStorage
           localStorage.setItem("session", JSON.stringify(state));
@@ -76,11 +79,6 @@ export const sessionSlice = createSlice({
     );
   },
 });
-
-export const selectUserRole = (state: RootState) => state.session.role;
-
-export const selectIsAuthorized = (state: RootState) =>
-  state.session.isAuthorized;
 
 export const { clearSessionData } = sessionSlice.actions;
 

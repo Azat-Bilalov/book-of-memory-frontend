@@ -1,3 +1,7 @@
+export type DocumentSliceState = {
+  query: string;
+};
+
 export type Document = {
   id: string;
   title: string;

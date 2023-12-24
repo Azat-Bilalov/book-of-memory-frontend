@@ -1,30 +1,56 @@
 import { createBrowserRouter } from "react-router-dom";
+import { PrivateRoute } from "@/entities/session/lib/PrivateRoute";
+import { PublicRoute } from "@/entities/session/lib/PublicRoute";
 import MainLayout from "@/pages/layout/main";
 import DocumentListPage from "@/pages/document-list";
 import DocumentDetailedPage from "@/pages/document-detailed";
 import LoginPage from "@/pages/login";
 import RegisterPage from "@/pages/register";
+import BasketPage from "@/pages/basket";
+import BindingPage from "@/pages/binding";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <MainLayout />,
+    path: "/book-of-memory-frontend/",
     children: [
       {
-        path: "/book-of-memory-frontend",
+        path: "",
         element: <DocumentListPage />,
       },
       {
-        path: "/book-of-memory-frontend/document/:id",
+        path: "document/:id",
         element: <DocumentDetailedPage />,
       },
       {
-        path: "/book-of-memory-frontend/login",
-        element: <LoginPage />,
+        element: <PublicRoute />,
+        children: [
+          {
+            path: "login",
+            element: <LoginPage />,
+          },
+          {
+            path: "register",
+            element: <RegisterPage />,
+          },
+          {
+            path: "hello",
+            element: <>Hello!</>,
+          },
+        ],
       },
       {
-        path: "/book-of-memory-frontend/register",
-        element: <RegisterPage />,
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "basket",
+            element: <BasketPage />,
+          },
+          {
+            path: "bindings",
+            element: <BindingPage />,
+          },
+        ],
       },
     ],
   },

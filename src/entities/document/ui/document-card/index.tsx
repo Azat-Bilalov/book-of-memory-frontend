@@ -1,16 +1,18 @@
 import cn from "classnames";
 import { Document } from "../../model";
 import { API_URL } from "@/shared/config";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export type DocumentCardProps = {
   document: Document;
+  onAddToBasket?: (documentId: string) => void;
   className?: string;
 };
 
 export const DocumentCard: React.FC<DocumentCardProps> = ({
   document,
+  onAddToBasket,
   className,
 }) => {
   return (
@@ -26,15 +28,23 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           <p className="card-text">{document.description}</p>
           <Link
             to={`/book-of-memory-frontend/document/${document.id}`}
-            className="btn btn-outline-primary"
+            className="btn btn-outline-primary me-3"
           >
             Подробнее
           </Link>
+          {onAddToBasket && (
+            <Button
+              variant="outline-success"
+              onClick={() => onAddToBasket(document.id)}
+            >
+              Добавить в корзину
+            </Button>
+          )}
         </div>
       </div>
       <Card className="d-md-none" style={{ width: "20rem" }}>
         <Card.Img variant="top" src={`${API_URL}/${document.imageUrl}`} />
-        <Card.Body>
+        <Card.Body className="d-flex flex-column justify-content-between gap-2">
           <Card.Title>{document.title}</Card.Title>
           <Card.Text>{document.description}</Card.Text>
           <Link
@@ -43,6 +53,14 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           >
             Подробнее
           </Link>
+          {onAddToBasket && (
+            <Button
+              variant="outline-success"
+              onClick={() => onAddToBasket(document.id)}
+            >
+              Добавить в корзину
+            </Button>
+          )}
         </Card.Body>
       </Card>
     </>

@@ -1,13 +1,6 @@
-import { RootState } from "@/app/store";
 import { documentApi } from "@/entities/document/api";
 import { createSlice } from "@reduxjs/toolkit";
-
-type BindingSliceState = {
-  dateTo: string;
-  dateFrom: string;
-  status: string;
-  enteredBindingId: string | null;
-};
+import { BindingSliceState } from "./types";
 
 const initialState: BindingSliceState = {
   dateTo: "",
@@ -39,12 +32,6 @@ export const bindingSlice = createSlice({
     );
   },
 });
-
-export const selectDateTo = (state: RootState) => state.binding.dateTo;
-export const selectDateFrom = (state: RootState) => state.binding.dateFrom;
-export const selectStatus = (state: RootState) => state.binding.status;
-export const selectEnteredBindingId = (state: RootState) =>
-  state.binding.enteredBindingId;
 
 export const { setDateFrom, setDateTo, setStatus } = bindingSlice.actions;
 

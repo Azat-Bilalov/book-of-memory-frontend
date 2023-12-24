@@ -1,18 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import logoSvg from "@assets/svg/logo.svg";
-import s from "./Header.module.scss";
-import { selectIsAuthorized } from "@/entities/session/model";
-import { useSelector } from "react-redux";
+import { useIsAuth, useName } from "@/entities/session/model";
 import { useLogoutMutation } from "@/entities/session/api";
-import { selectEnteredBindingId } from "@/entities/binding/model";
-import EmptyBasketIcon from "./EmptyBasketSvg.svg";
-import FillingBasketIcon from "./FillingBasketSvg.svg";
+
+import ExitIcon from "./ExitIcon.svg";
+
+import s from "./Header.module.scss";
 
 export const Header = () => {
   const location = useLocation();
-  const isAuth = useSelector(selectIsAuthorized);
-  const enteredBindingId = useSelector(selectEnteredBindingId);
+  const isAuth = useIsAuth();
+  const name = useName();
   const [logout] = useLogoutMutation();
 
   const handleLogout = () => {
@@ -54,33 +53,30 @@ export const Header = () => {
                 as={Link}
                 disabled={!isAuth}
                 to="/book-of-memory-frontend/bindings"
-                className={location.pathname === "/bindings" ? "active" : ""}
+                className={
+                  location.pathname === "/book-of-memory-frontend/bindings"
+                    ? "active"
+                    : ""
+                }
               >
-                История заявок
+                Заявки
               </Nav.Link>
-              {isAuth && (
-                <Nav.Link
-                  as={Link}
-                  to="/book-of-memory-frontend/basket"
-                  className="mx-2 d-flex align-items-center"
-                >
-                  {enteredBindingId ? (
-                    <img
-                      src={FillingBasketIcon}
-                      alt=""
-                      width={24}
-                      height={24}
-                    />
-                  ) : (
-                    <img src={EmptyBasketIcon} alt="" width={24} height={24} />
-                  )}
-                </Nav.Link>
-              )}
-              <Nav.Item className="d-flex align-items-center">
+              <Nav.Item className="d-flex align-items-center gap-1">
                 {isAuth ? (
-                  <Button variant="outline-light" onClick={handleLogout}>
-                    Выйти
-                  </Button>
+                  <>
+                    <span className="p-2 rounded text-secondary bg-light">
+                      {name}
+                    </span>
+                    <img
+                      src={ExitIcon}
+                      alt=""
+                      width="24"
+                      height="24"
+                      onClick={handleLogout}
+                      style={{ cursor: "pointer" }}
+                      title="Выйти"
+                    />
+                  </>
                 ) : (
                   <Link to="/book-of-memory-frontend/login">
                     <Button variant="outline-light">Войти</Button>

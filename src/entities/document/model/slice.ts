@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-type DocumentSliceState = {
-  query: string;
-};
+import { DocumentSliceState } from "./types";
 
 const initialState: DocumentSliceState = {
   query: "",
@@ -17,9 +14,6 @@ export const documentSlice = createSlice({
     },
   },
 });
-
-export const selectQuery = (state: { document: DocumentSliceState }) =>
-  state.document.query;
 
 export const { setQuery } = documentSlice.actions;
 

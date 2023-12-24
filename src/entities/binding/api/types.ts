@@ -1,3 +1,5 @@
+import { DocumentDto } from "@/entities/document/api/types";
+
 export type BindingDto = {
   binding_id: string;
   status: string;
@@ -7,6 +9,7 @@ export type BindingDto = {
   user_id: string;
   moderator_id: string;
   veteran_id: string;
+  documents?: DocumentDto[];
 };
 
 export type QueryParams = {

@@ -1,3 +1,4 @@
+import { normalizeDocument } from "@/entities/document/lib/normalizeDocument";
 import { BindingDto } from "../api/types";
 import { Binding } from "../model/types";
 
@@ -11,5 +12,8 @@ export const normalizeBinding = (binding: BindingDto): Binding => {
     userId: binding.user_id,
     moderatorId: binding.moderator_id,
     veteranId: binding.veteran_id,
+    documents: binding.documents?.map((document) =>
+      normalizeDocument(document)
+    ),
   };
 };

@@ -1,12 +1,12 @@
 import React from "react";
-import { DocumentDetailedWidget } from "@/widgets/document-detailed-widget";
+import { BasketWidget } from "@/widgets/basket-widget";
 
-const DocumentDetailedPage: React.FC = () => {
+const BasketPage: React.FC = () => {
   return (
     <div>
-      <DocumentDetailedWidget />
+      <BasketWidget />
     </div>
   );
 };
 
-export default DocumentDetailedPage;
+export default BasketPage;

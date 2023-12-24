@@ -16,10 +16,6 @@ export const LoginForm: React.FC = () => {
     login({ email, passwd });
   };
 
-  React.useEffect(() => {
-    console.log(data, error);
-  }, [data, error]);
-
   return (
     <Form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
       <Form.Group controlId="formBasicEmail">

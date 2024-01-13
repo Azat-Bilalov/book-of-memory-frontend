@@ -1,4 +1,9 @@
-import { axiosBaseApi, BASKET_TAG, BINDDINGS_TAG } from "@/shared/api";
+import {
+  axiosBaseApi,
+  BASKET_TAG,
+  BINDDINGS_TAG,
+  SESSION_TAG,
+} from "@/shared/api";
 import { normalizeBinding } from "../lib/normalizeBinding";
 import { BindingDto, QueryParams } from "./types";
 import { Binding } from "../model/types";
@@ -15,7 +20,7 @@ export const bindingApi = axiosBaseApi.injectEndpoints({
           status,
         },
       }),
-      providesTags: [BINDDINGS_TAG],
+      providesTags: [BINDDINGS_TAG, BASKET_TAG, SESSION_TAG],
       transformResponse: (response: BindingDto[]) =>
         response.map((binding) => normalizeBinding(binding)),
     }),
@@ -24,7 +29,7 @@ export const bindingApi = axiosBaseApi.injectEndpoints({
         url: `/bindings/${id}`,
         method: "GET",
       }),
-      providesTags: [BINDDINGS_TAG],
+      providesTags: [BINDDINGS_TAG, SESSION_TAG],
       transformResponse: (response: BindingDto) => normalizeBinding(response),
     }),
     updateBinding: build.mutation<

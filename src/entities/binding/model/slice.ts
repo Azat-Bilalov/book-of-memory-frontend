@@ -6,6 +6,7 @@ const initialState: BindingSliceState = {
   dateTo: "",
   dateFrom: "",
   status: "",
+  nameFilter: "",
   enteredBindingId: null,
 };
 
@@ -22,6 +23,9 @@ export const bindingSlice = createSlice({
     setStatus: (state, action) => {
       state.status = action.payload;
     },
+    setNameFilter: (state, action) => {
+      state.nameFilter = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -33,6 +37,7 @@ export const bindingSlice = createSlice({
   },
 });
 
-export const { setDateFrom, setDateTo, setStatus } = bindingSlice.actions;
+export const { setDateFrom, setDateTo, setStatus, setNameFilter } =
+  bindingSlice.actions;
 
 export const { reducer: bindingReducer } = bindingSlice;

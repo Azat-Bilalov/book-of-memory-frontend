@@ -11,7 +11,10 @@ export const useBindingsFilter = () => {
   const status = useSelector(
     (state: { binding: BindingSliceState }) => state.binding.status
   );
-  return { dateTo, dateFrom, status };
+  const nameFilter = useSelector(
+    (state: { binding: BindingSliceState }) => state.binding.nameFilter
+  );
+  return { dateTo, dateFrom, status, nameFilter };
 };
 
 export const useEnteredBindingId = () =>

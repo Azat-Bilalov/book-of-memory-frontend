@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import { axiosBaseQuery } from "./axiosBaseQuery";
 import {
   BASKET_TAG,
@@ -10,7 +11,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 
 export const axiosBaseApi = createApi({
   endpoints: () => ({}),
-  baseQuery: axiosBaseQuery({ baseUrl: "http://localhost:8080" }),
+  baseQuery: axiosBaseQuery({ baseUrl: API_URL }),
   reducerPath: "api",
   tagTypes: [
     SESSION_TAG,

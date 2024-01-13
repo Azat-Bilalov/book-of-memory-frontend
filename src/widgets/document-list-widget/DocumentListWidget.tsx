@@ -10,14 +10,14 @@ import { useDispatch } from "react-redux";
 import { setQuery } from "@/entities/document/model/slice";
 import React from "react";
 import { capitalize } from "@/shared/lib";
-import { useIsAuth } from "@/entities/session/model";
+import { useIsAuth, useRole } from "@/entities/session/model";
 import { useDocumentQuery } from "@/entities/document/model";
 
 export const DocumentListWidget = () => {
   const query = useDocumentQuery();
   const dispatch = useDispatch();
 
-  const isAuthorized = useIsAuth();
+  const isAuth = useIsAuth();
 
   const { data, isLoading, refetch } = useGetDocumentsQuery(query);
   const [addToBasket, { isSuccess: isAddedToBasket, error: addToBasketError }] =
@@ -43,7 +43,9 @@ export const DocumentListWidget = () => {
   }, [isAddedToBasket, addToBasketError]);
 
   return (
-    <Container className="mt-2 d-grid gap-4">
+    <Container className="d-grid gap-4 mb-3" style={{ marginTop: "100px" }}>
+      <h1 className="text-center">Список документов</h1>
+
       <SnackbarProvider
         maxSnack={3}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -55,7 +57,7 @@ export const DocumentListWidget = () => {
       {data && (
         <DocumentList
           documents={data.documents}
-          onAddToBasket={isAuthorized ? handleAddToBasket : undefined}
+          onAddToBasket={isAuth ? handleAddToBasket : undefined}
         />
       )}
 

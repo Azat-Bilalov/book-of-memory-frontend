@@ -1,8 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import logoSvg from "@assets/svg/logo.svg";
-import { useIsAuth, useName } from "@/entities/session/model";
+import { useIsAuth, useName, useRole } from "@/entities/session/model";
 import { useLogoutMutation } from "@/entities/session/api";
+import cn from "classnames";
 
 import ExitIcon from "./ExitIcon.svg";
 
@@ -10,17 +11,26 @@ import s from "./Header.module.scss";
 
 export const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const isAuth = useIsAuth();
   const name = useName();
+  const role = useRole();
   const [logout] = useLogoutMutation();
 
   const handleLogout = () => {
     logout();
+    navigate("/book-of-memory-frontend/");
   };
 
   return (
     <header className={s.header}>
-      <Navbar data-bs-theme="dark" className={s.navbar}>
+      <Navbar
+        data-bs-theme="dark"
+        className={cn(s.navbar, {
+          [s.navbarTransparent]:
+            location.pathname === "/book-of-memory-frontend/",
+        })}
+      >
         <Container>
           <Navbar.Brand
             as={Link}
@@ -37,12 +47,63 @@ export const Header = () => {
             Книга памяти
           </Navbar.Brand>
           <Navbar.Collapse id="responsive-navbar-nav">
+            {isAuth && role === "moderator" && (
+              <Nav className="ms-auto">
+                <Nav.Link
+                  as={Link}
+                  to="/book-of-memory-frontend/documents/add"
+                  className={
+                    location.pathname ===
+                    "/book-of-memory-frontend/documents/add"
+                      ? "active"
+                      : ""
+                  }
+                >
+                  Добавить документ
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/book-of-memory-frontend/veterans/add"
+                  className={
+                    location.pathname ===
+                    "/book-of-memory-frontend/veterans/add"
+                      ? "active"
+                      : ""
+                  }
+                >
+                  Добавить ветерана
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/book-of-memory-frontend/documents/table"
+                  className={
+                    location.pathname ===
+                    "/book-of-memory-frontend/documents/table"
+                      ? "active"
+                      : ""
+                  }
+                >
+                  Таблица документов
+                </Nav.Link>
+              </Nav>
+            )}
             <Nav className="ms-auto">
               <Nav.Link
                 as={Link}
-                to="/book-of-memory-frontend/"
+                to="/book-of-memory-frontend/veterans"
                 className={
-                  location.pathname === "/book-of-memory-frontend/"
+                  location.pathname === "/book-of-memory-frontend/veterans"
+                    ? "active"
+                    : ""
+                }
+              >
+                Ветераны
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/book-of-memory-frontend/documents"
+                className={
+                  location.pathname === "/book-of-memory-frontend/documents"
                     ? "active"
                     : ""
                 }

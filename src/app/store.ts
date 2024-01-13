@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { sessionReducer } from "@/entities/session/model";
-// import { sessionApi } from "@/entities/session/api";
 import { documentReducer } from "@/entities/document/model";
 import { axiosBaseApi } from "@/shared/api";
 import { bindingReducer } from "@/entities/binding/model";
-// import { documentApi } from "@/entities/document/api";
+import { veteranReducer } from "@/entities/veteran/model/slice";
 
 export const store = configureStore({
   reducer: {
     session: sessionReducer,
     document: documentReducer,
     binding: bindingReducer,
+    veteran: veteranReducer,
     api: axiosBaseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

@@ -1,0 +1,35 @@
+.root {
+  &__row_warned {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: -30px;
+      background-image: url("./WarningIcon.svg");
+      width: 24px;
+      height: 24px;
+      top: 0;
+      bottom: 0;
+      overflow: auto;
+      margin: auto;
+    }
+  }
+
+  &__controllers {
+    position: fixed;
+    bottom: 20px;
+    margin: 0 auto;
+    padding: 8px 16px;
+    border-radius: 16px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: #fff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+  }
+}

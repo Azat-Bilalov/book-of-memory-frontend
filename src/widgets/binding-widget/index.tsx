@@ -1,1 +1,0 @@
-export { BindingWidget } from "./BindingWidget";

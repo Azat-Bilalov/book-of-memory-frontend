@@ -9,8 +9,9 @@ import {
 import React from "react";
 import { DocumentCard } from "@/entities/document/ui/document-card";
 import TrashIcon from "./TrashSvg.svg";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ChooseVeteranForm } from "@/features/veteran/choose-veteran-form";
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
 export const BasketWidget = () => {
   const navigate = useNavigate();
@@ -22,28 +23,34 @@ export const BasketWidget = () => {
 
   const [deleteDocumentFromBinding] = useDeleteDocumentFromBindingMutation();
 
-  const [submitBasket] = useSubmitBindingMutation();
-  const [deleteBasket] = useDeleteBindingMutation();
-
-  const [error, setError] = React.useState<string | null>(null);
+  const [submitBasket, { isSuccess: isSuccessSubmit, error: submitError }] =
+    useSubmitBindingMutation();
+  const [deleteBasket, { isSuccess: isSuccessDelete, error: deleteError }] =
+    useDeleteBindingMutation();
 
   const handleSubmit = () => {
-    if (basket?.veteranId) {
-      setError("Выберите ветерана");
-      return;
+    if (!basket?.veteranId) {
+      enqueueSnackbar("Выберите ветерана", { variant: "error" });
     }
     submitBasket(enteredBindingId!);
-    navigate("/book-of-memory-frontend");
   };
 
   const handleDelete = () => {
     deleteBasket(enteredBindingId!);
-    navigate("/book-of-memory-frontend");
   };
+
+  React.useEffect(() => {
+    if (submitError) {
+      enqueueSnackbar("Не удалось оформить заявку", { variant: "error" });
+    }
+    if (deleteError) {
+      enqueueSnackbar("Не удалось удалить заявку", { variant: "error" });
+    }
+  }, [submitError, deleteError]);
 
   if (!enteredBindingId || !basket?.documents!.length) {
     return (
-      <Container className="d-grid gap-4" style={{ marginTop: "80px" }}>
+      <Container className="d-grid gap-4 mb-4" style={{ marginTop: "100px" }}>
         <h1 className="h1 text-center">Корзина пуста</h1>
         <Button onClick={() => navigate("/book-of-memory-frontend")}>
           Вернуться к документам
@@ -53,7 +60,12 @@ export const BasketWidget = () => {
   }
 
   return (
-    <Container className="d-grid gap-4" style={{ marginTop: "80px" }}>
+    <Container className="d-grid gap-4" style={{ marginTop: "100px" }}>
+      <SnackbarProvider
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        maxSnack={3}
+      />
+
       <ChooseVeteranForm
         className="d-flex justify-content-center gap-3"
         basketId={enteredBindingId}
@@ -61,6 +73,10 @@ export const BasketWidget = () => {
       />
 
       {isLoading && <p>Загрузка...</p>}
+      {(isSuccessSubmit || isSuccessDelete) && (
+        <Navigate to="/book-of-memory-frontend" />
+      )}
+
       <h1 className="h1 text-center">Составление заявки</h1>
       <div className="d-grid d-md-flex justify-content-center gap-3">
         <div className="d-flex flex-column justify-content-center align-items-center gap-2">
@@ -80,8 +96,6 @@ export const BasketWidget = () => {
           ))}
         </div>
       </div>
-
-      {error && <p className="text-danger text-center">{error}</p>}
 
       <div className="d-flex justify-content-center gap-3">
         <Button variant="primary" type="submit" onClick={handleSubmit}>

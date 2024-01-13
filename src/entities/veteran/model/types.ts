@@ -7,3 +7,7 @@ export type Veteran = {
   imageUrl: string;
   createdAt: string;
 };
+
+export type VeteranSliceState = {
+  query: string;
+};

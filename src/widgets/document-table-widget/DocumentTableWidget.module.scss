@@ -1,0 +1,18 @@
+.root {
+  &__controllers {
+    position: fixed;
+    bottom: 20px;
+    margin: 0 auto;
+    padding: 8px 16px;
+    border-radius: 16px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: #fff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+  }
+}

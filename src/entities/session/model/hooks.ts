@@ -14,3 +14,6 @@ export const useName = () =>
     (state: { session: SessionSliceState }) =>
       `${state.session.firstName} ${state.session.lastName}`
   );
+
+export const useUserId = () =>
+  useSelector((state: { session: SessionSliceState }) => state.session.userId);

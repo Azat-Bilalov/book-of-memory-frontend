@@ -5,6 +5,7 @@ export type SessionSliceState =
       role: Role;
       firstName: string;
       lastName: string;
+      userId: SessionUserId;
     }
   | {
       accessToken?: string;
@@ -12,6 +13,7 @@ export type SessionSliceState =
       role?: Role;
       firstName?: string;
       lastName?: string;
+      userId?: SessionUserId;
     };
 
 export type Session =
@@ -21,6 +23,7 @@ export type Session =
       role: Role;
       firstName: string;
       lastName: string;
+      userId: SessionUserId;
     }
   | {
       accessToken?: string;
@@ -28,6 +31,7 @@ export type Session =
       role?: Role;
       firstName?: string;
       lastName?: string;
+      userId?: SessionUserId;
     };
 
 export type SessionUserId = string;

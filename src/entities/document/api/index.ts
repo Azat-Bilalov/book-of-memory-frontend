@@ -1,9 +1,20 @@
-import { axiosBaseApi, BINDDINGS_TAG, DOCUMENTS_TAG } from "@/shared/api";
+import {
+  axiosBaseApi,
+  BASKET_TAG,
+  BINDDINGS_TAG,
+  DOCUMENTS_TAG,
+  SESSION_TAG,
+} from "@/shared/api";
 import {
   normalizeDocument,
   normalizeDocumentList,
 } from "../lib/normalizeDocument";
-import { DocumentDto, DocumentListDto } from "./types";
+import {
+  CreateDocumentRequest,
+  DocumentDto,
+  DocumentListDto,
+  UpdateDocumentRequest,
+} from "./types";
 import { Document, DocumentList } from "../model/types";
 
 export const documentApi = axiosBaseApi.injectEndpoints({
@@ -14,7 +25,7 @@ export const documentApi = axiosBaseApi.injectEndpoints({
         method: "GET",
         params: { title },
       }),
-      providesTags: [DOCUMENTS_TAG],
+      providesTags: [DOCUMENTS_TAG, SESSION_TAG, BASKET_TAG],
       transformResponse: (response: DocumentListDto) =>
         normalizeDocumentList(response),
     }),
@@ -40,6 +51,37 @@ export const documentApi = axiosBaseApi.injectEndpoints({
       }),
       invalidatesTags: [DOCUMENTS_TAG, BINDDINGS_TAG],
     }),
+    CreateDocument: build.mutation<Document, CreateDocumentRequest>({
+      query: (body) => ({
+        url: `/documents`,
+        method: "POST",
+        data: body,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }),
+      invalidatesTags: [DOCUMENTS_TAG],
+      transformResponse: (response: DocumentDto) => normalizeDocument(response),
+    }),
+    UpdateDocument: build.mutation<
+      Document,
+      { id: string; body: UpdateDocumentRequest }
+    >({
+      query: ({ id, body }) => ({
+        url: `/documents/${id}`,
+        method: "PUT",
+        data: body,
+      }),
+      invalidatesTags: [DOCUMENTS_TAG],
+      transformResponse: (response: DocumentDto) => normalizeDocument(response),
+    }),
+    DeleteDocument: build.mutation<void, string>({
+      query: (id) => ({
+        url: `/documents/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [DOCUMENTS_TAG],
+    }),
   }),
 });
 
@@ -48,4 +90,7 @@ export const {
   useGetDocumentQuery,
   useAddDocumentToBindingMutation,
   useDeleteDocumentFromBindingMutation,
+  useCreateDocumentMutation,
+  useUpdateDocumentMutation,
+  useDeleteDocumentMutation,
 } = documentApi;

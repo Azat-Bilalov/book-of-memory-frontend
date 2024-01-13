@@ -31,12 +31,14 @@ export const sessionSlice = createSlice({
           payload.accessToken &&
           payload.role &&
           payload.firstName &&
-          payload.lastName
+          payload.lastName &&
+          payload.userId
         ) {
           state.accessToken = payload.accessToken;
           state.role = payload.role;
           state.firstName = payload.firstName;
           state.lastName = payload.lastName;
+          state.userId = payload.userId;
 
           // save session to localStorage
           localStorage.setItem("session", JSON.stringify(state));
@@ -65,12 +67,14 @@ export const sessionSlice = createSlice({
           payload.accessToken &&
           payload.role &&
           payload.firstName &&
-          payload.lastName
+          payload.lastName &&
+          payload.userId
         ) {
           state.accessToken = payload.accessToken;
           state.role = payload.role;
           state.firstName = payload.firstName;
           state.lastName = payload.lastName;
+          state.userId = payload.userId;
 
           // save session to localStorage
           localStorage.setItem("session", JSON.stringify(state));

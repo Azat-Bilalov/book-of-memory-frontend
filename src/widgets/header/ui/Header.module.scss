@@ -8,4 +8,8 @@
 
 .navbar {
   background: linear-gradient(-45deg, #ea4545, #f5394d, #ff4040, #ff0000);
+
+  &_transparent {
+    background: transparent;
+  }
 }

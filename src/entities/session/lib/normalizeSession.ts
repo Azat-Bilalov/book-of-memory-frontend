@@ -8,5 +8,6 @@ export const normalizeSession = (sessionDto: SessionDto): Session => {
     role: sessionDto.role,
     firstName: sessionDto.first_name,
     lastName: sessionDto.last_name,
+    userId: sessionDto.user_id,
   };
 };

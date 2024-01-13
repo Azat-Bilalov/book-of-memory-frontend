@@ -7,3 +7,7 @@ export type VeteranDto = {
   image_url: string;
   created_at: string;
 };
+
+export type CreateVeteranRequest = FormData;
+
+export type UpdateVeteranRequest = FormData;

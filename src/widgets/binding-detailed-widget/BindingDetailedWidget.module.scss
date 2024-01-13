@@ -1,0 +1,18 @@
+.root {
+  &__row_warned {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: -30px;
+      background-image: url("./WarningIcon.svg");
+      width: 24px;
+      height: 24px;
+      top: 0;
+      bottom: 0;
+      overflow: auto;
+      margin: auto;
+    }
+  }
+}

@@ -1,27 +1,22 @@
 import { useEnteredBindingId } from "@/entities/binding/model";
 import cn from "classnames";
-import EmptyFolderIcon from "./EmptyFolderIcon.svg";
-import FillingFolderIcon from "./FillingFolderIcon.svg";
+import { Link } from "react-router-dom";
 
 import s from "./BasketIconWidget.module.scss";
-import { useIsAuth } from "@/entities/session/model";
-import { Link } from "react-router-dom";
+
+import FillingFolderIcon from "./FillingFolderIcon.svg";
+import EmptyFolderIcon from "./EmptyFolderIcon.svg";
 
 export type BasketIconWidgetProps = {
   className?: string;
 };
 
 export const BasketIconWidget = ({ className }: BasketIconWidgetProps) => {
-  const isAuth = useIsAuth();
   const enteredBindingId = useEnteredBindingId();
-
-  if (!isAuth) {
-    return null;
-  }
 
   return (
     <Link
-      to="/book-of-memory-frontend/basket"
+      to={`/book-of-memory-frontend/bindings/${enteredBindingId}`}
       className={cn(s.root, !enteredBindingId && s.root_disabled, className)}
     >
       <img

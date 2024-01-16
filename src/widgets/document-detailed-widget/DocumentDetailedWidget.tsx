@@ -24,7 +24,7 @@ export const DocumentDetailedWidget = () => {
     : `${API_URL}/${document.imageUrl}`;
 
   return (
-    <Container className="d-grid gap-4" style={{ marginTop: "60px" }}>
+    <Container className="d-grid gap-4 mb-3" style={{ marginTop: "60px" }}>
       <Breadcrumb
         items={[
           { text: "Документы", href: "/book-of-memory-frontend/" },

@@ -18,7 +18,9 @@ export async function fetchDocuments(
 
     return documents.map(normalizeDocument);
   } catch {
-    return DOCUMENTS_MOCK.map(normalizeDocument);
+    return DOCUMENTS_MOCK.map(normalizeDocument).filter((d) =>
+      d.title.toLowerCase().includes(title?.toLowerCase() ?? "")
+    );
   }
 }
 

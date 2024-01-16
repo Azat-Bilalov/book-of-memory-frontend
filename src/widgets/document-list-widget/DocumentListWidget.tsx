@@ -26,7 +26,7 @@ export const DocumentListWidget = () => {
   }, [searchParams]);
 
   return (
-    <Container className="mt-2 d-grid gap-4">
+    <Container className="mt-2 d-grid gap-4 mb-3">
       <DocumentSearch
         onSearch={onSearch}
         defaultQuery={searchParams.get("query") || ""}

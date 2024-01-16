@@ -8,6 +8,7 @@ import cn from "classnames";
 import ExitIcon from "./ExitIcon.svg";
 
 import s from "./Header.module.scss";
+import React from "react";
 
 export const Header = () => {
   const location = useLocation();
@@ -25,6 +26,7 @@ export const Header = () => {
   return (
     <header className={s.header}>
       <Navbar
+        expand="lg"
         data-bs-theme="dark"
         className={cn(s.navbar, {
           [s.navbarTransparent]:
@@ -46,6 +48,7 @@ export const Header = () => {
             />{" "}
             Книга памяти
           </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             {isAuth && role === "moderator" && (
               <Nav className="ms-auto">

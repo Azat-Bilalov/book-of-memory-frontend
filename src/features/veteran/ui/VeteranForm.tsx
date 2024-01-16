@@ -85,7 +85,7 @@ export const VeteranForm: React.FC<VeteranFormProps> = ({
           type="date"
           name="birth_date"
           placeholder="Дата рождения"
-          defaultValue={veteran?.birthDate}
+          defaultValue={veteran?.birthDate.slice(0, 10)}
           required
         />
       </Form.Group>

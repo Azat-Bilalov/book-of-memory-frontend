@@ -32,7 +32,7 @@ export const VereranListWidget = () => {
       <h1 className="text-center">Список ветеранов</h1>
       <VeteranSearch onSearch={handleSearch} defaultQuery={query} />
       {isLoading && <p>Загрузка...</p>}
-      <div className="d-flex flex-wrap justify-content-center gap-2">
+      <div className="d-grid grid-col-2 gap-2">
         {veterans?.map((veteran) => (
           <div className="d-flex gap-2 align-items-center" key={veteran.id}>
             <VeteranCard veteran={veteran} key={veteran.id} />

@@ -4,6 +4,7 @@ import { fetchDocument } from "@/entities/document/api";
 import { Button, Container } from "react-bootstrap";
 import Breadcrumb from "@/shared/ui/breadcrumb";
 import { useParams } from "react-router-dom";
+import { API_URL } from "@/shared/config";
 
 export const DocumentDetailedWidget = () => {
   const [document, setDocument] = React.useState<DocumentModel | null>(null);
@@ -18,6 +19,10 @@ export const DocumentDetailedWidget = () => {
 
   if (!document) return null;
 
+  const imageSrc = document.imageUrl.includes("data")
+    ? document.imageUrl
+    : `${API_URL}/${document.imageUrl}`;
+
   return (
     <Container className="d-grid gap-4" style={{ marginTop: "60px" }}>
       <Breadcrumb
@@ -29,7 +34,7 @@ export const DocumentDetailedWidget = () => {
       <h1 className="h1 text-center">{document?.title}</h1>
       <div className="d-grid d-md-flex justify-content-center gap-3">
         <img
-          src={`http://localhost:8080/${document?.imageUrl}`}
+          src={imageSrc}
           style={{
             maxWidth: "300px",
             maxHeight: "300px",

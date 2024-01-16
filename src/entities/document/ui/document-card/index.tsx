@@ -13,12 +13,16 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
   document,
   className,
 }) => {
+  const imageSrc = document.imageUrl.includes("data")
+    ? document.imageUrl
+    : `${API_URL}/${document.imageUrl}`;
+
   return (
     <>
       <div className={cn("card flex-row d-md-flex d-none w-100", className)}>
         <img
           className="card-img-left"
-          src={`${API_URL}/${document.imageUrl}`}
+          src={imageSrc}
           style={{ width: "200px", height: "200px", objectFit: "cover" }}
         />
         <div className="card-body w-100">

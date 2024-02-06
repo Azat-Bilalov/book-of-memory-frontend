@@ -1,17 +1,19 @@
 import cn from "classnames";
-import { DocumentModel } from "../../models";
+import { DocumentModel } from "../../model";
 import { API_URL } from "@/shared/config";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export type DocumentCardProps = {
   document: DocumentModel;
+  onAddToBasket?: (document: DocumentModel) => void;
   className?: string;
 };
 
 export const DocumentCard: React.FC<DocumentCardProps> = ({
   document,
   className,
+  onAddToBasket,
 }) => {
   const imageSrc = document.imageUrl.includes("data")
     ? document.imageUrl
@@ -34,6 +36,14 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           >
             Подробнее
           </Link>
+          {onAddToBasket && (
+            <Button
+              onClick={() => onAddToBasket(document)}
+              variant="outline-success mx-2"
+            >
+              Добавить в заявку
+            </Button>
+          )}
         </div>
       </div>
       <Card className="d-md-none" style={{ width: "20rem" }}>
@@ -47,6 +57,14 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           >
             Подробнее
           </Link>
+          {onAddToBasket && (
+            <Button
+              onClick={() => onAddToBasket(document)}
+              variant="outline-success mx-2"
+            >
+              Добавить в заявку
+            </Button>
+          )}
         </Card.Body>
       </Card>
     </>

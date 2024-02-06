@@ -1,0 +1,31 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  color: #61707d;
+  margin-top: 16px;
+
+  &-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__item {
+    color: var(--text-accent);
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    padding: 2px;
+    background: linear-gradient(0deg, #c9f76f, #c9f76f) no-repeat right bottom /
+      0 var(--bg-h);
+    transition: background-size 350ms;
+    --bg-h: 100%;
+    width: fit-content;
+    text-decoration: none;
+
+    &:hover {
+      background-size: 100% var(--bg-h);
+      background-position-x: left;
+    }
+  }
+}

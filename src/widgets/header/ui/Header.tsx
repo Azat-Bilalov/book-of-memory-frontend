@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 import logoSvg from "@assets/svg/logo.svg";
@@ -12,7 +12,8 @@ export const Header = () => {
       <Navbar data-bs-theme="dark" className={s.navbar}>
         <Container>
           <Navbar.Brand
-            href="/book-of-memory-frontend/"
+            as={Link}
+            to="/book-of-memory-frontend/"
             className="text-light d-flex align-center gap-2"
           >
             <img
@@ -27,7 +28,8 @@ export const Header = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto">
               <Nav.Link
-                href="/book-of-memory-frontend/"
+                as={Link}
+                to="/book-of-memory-frontend/"
                 className={
                   location.pathname === "/book-of-memory-frontend/"
                     ? "active"
@@ -37,9 +39,13 @@ export const Header = () => {
                 Документы
               </Nav.Link>
               <Nav.Link
-                disabled
-                href="/bindings"
-                className={location.pathname === "/bindings" ? "active" : ""}
+                as={Link}
+                to="/book-of-memory-frontend/bindings"
+                className={
+                  location.pathname === "/book-of-memory-frontend/bindings"
+                    ? "active"
+                    : ""
+                }
               >
                 Заявки
               </Nav.Link>

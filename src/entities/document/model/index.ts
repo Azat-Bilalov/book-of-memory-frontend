@@ -23,3 +23,7 @@ export const normalizeDocument = (document: DocumentApi): DocumentModel => ({
   description: document.description,
   imageUrl: document.image_url,
 });
+
+export * from "./slice";
+export * from "./types";
+export * from "./hooks";

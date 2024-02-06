@@ -1,37 +1,73 @@
 import React from "react";
-import { DocumentModel } from "@/entities/document/models";
+import {
+  DocumentModel,
+  setQuery,
+  useDocumentQuery,
+} from "@/entities/document/model";
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import DocumentSearch from "@/features/document/ui";
 import { fetchDocuments } from "@/entities/document/api";
 import { Container } from "react-bootstrap";
 import DocumentList from "@/entities/document/ui/document-card-list";
-import { useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  addDocumentToBasket,
+  setCreatedAt,
+  setEnteredBindingId,
+  useDocumentsInBasket,
+  useEnteredBindingId,
+} from "@/entities/binding/model";
+import { idGenerator } from "@/shared/lib/idGenerator";
 
 export const DocumentListWidget = () => {
-  const [documents, setDocuments] = React.useState<DocumentModel[]>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const query = useDocumentQuery();
+  const enteredBindingId = useEnteredBindingId();
+  const documentInBasket = useDocumentsInBasket();
+  const dispatch = useDispatch();
 
-  const onSearch = (query: string) => {
-    if (query === "") {
-      setSearchParams({});
+  const [documents, setDocuments] = React.useState<DocumentModel[]>([]);
+
+  const handleSearch = (query: string) => {
+    dispatch(setQuery(query));
+  };
+
+  console.log(documentInBasket);
+
+  const handleAddToBasket = (document: DocumentModel) => {
+    if (documentInBasket.find((d) => document.id === d.id)) {
+      enqueueSnackbar("Документ уже добавлен", { variant: "error" });
       return;
     }
-    setSearchParams({ query });
+
+    dispatch(addDocumentToBasket(document));
+    enqueueSnackbar("Документ добавлен в корзину", { variant: "success" });
+
+    if (!enteredBindingId) {
+      dispatch(setEnteredBindingId(idGenerator()));
+      dispatch(setCreatedAt(new Date().toLocaleString()));
+    }
   };
 
   React.useEffect(() => {
-    const query = searchParams.get("query");
     fetchDocuments(query).then((documents: DocumentModel[]) =>
       setDocuments(documents)
     );
-  }, [searchParams]);
+  }, [query]);
 
   return (
     <Container className="mt-2 d-grid gap-4 mb-3">
-      <DocumentSearch
-        onSearch={onSearch}
-        defaultQuery={searchParams.get("query") || ""}
+      <DocumentSearch onSearch={handleSearch} defaultQuery={query} />
+
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       />
-      <DocumentList documents={documents} />
+
+      <DocumentList documents={documents} onAddToBasket={handleAddToBasket} />
+      {/* 
+      {documents.length === 0 && (
+        <h5>По запросу "{query}" ничего не найдено</h5>
+      )} */}
     </Container>
   );
 };

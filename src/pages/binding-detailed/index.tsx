@@ -9,13 +9,13 @@ const BindingDetailedPage: React.FC = () => {
   const enteredBindingId = useEnteredBindingId();
 
   return (
-    <div>
+    <>
       {enteredBindingId?.toString() === id ? (
         <BasketWidget />
       ) : (
         <BindingDetailedWidget />
       )}
-    </div>
+    </>
   );
 };
 

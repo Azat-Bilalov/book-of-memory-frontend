@@ -31,8 +31,6 @@ export const DocumentListWidget = () => {
     dispatch(setQuery(query));
   };
 
-  console.log(documentInBasket);
-
   const handleAddToBasket = (document: DocumentModel) => {
     if (documentInBasket.find((d) => document.id === d.id)) {
       enqueueSnackbar("Документ уже добавлен", { variant: "error" });
@@ -55,7 +53,9 @@ export const DocumentListWidget = () => {
   }, [query]);
 
   return (
-    <Container className="mt-2 d-grid gap-4 mb-3">
+    <Container className="d-grid gap-4 mb-3" style={{ marginTop: "100px" }}>
+      <h1 className="h1 text-center">Документы</h1>
+
       <DocumentSearch onSearch={handleSearch} defaultQuery={query} />
 
       <SnackbarProvider

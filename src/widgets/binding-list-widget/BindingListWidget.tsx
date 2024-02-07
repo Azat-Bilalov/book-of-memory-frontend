@@ -63,37 +63,47 @@ export const BindingListWidget = () => {
 
   return (
     <Container className="d-grid gap-4 mb-5" style={{ marginTop: "90px" }}>
-      <div className="d-flex justify-content-center gap-3">
-        <Form.Select
-          aria-label="status-example"
-          onChange={(e) => handleStatusChange(e)}
-          value={status}
-        >
-          <option value="">Любой статус</option>
-          {Object.keys(STATUS_MAP).map((status) => (
-            <option key={status} value={status}>
-              {STATUS_MAP[status]}
-            </option>
-          ))}
-        </Form.Select>
-
-        <Form.Control
-          type="date"
-          value={dateFrom}
-          placeholder="Дата начала"
-          onChange={(e) => handleDateFromChange(e.target.value)}
-          title="Дата начала формирования заявки"
-        />
-        <Form.Control
-          type="date"
-          value={dateTo}
-          placeholder="Дата окончания"
-          onChange={(e) => handleDateToChange(e.target.value)}
-          title="Дата окончания формирования заявки"
-        />
-      </div>
-
       <h1 className="h1 text-center">Заявки</h1>
+
+      <div className="row">
+        <div className="col-4">
+          Статус
+          <Form.Select
+            aria-label="status-example"
+            onChange={(e) => handleStatusChange(e)}
+            value={status}
+          >
+            <option value="">Любой статус</option>
+            {Object.keys(STATUS_MAP).map((status) => (
+              <option key={status} value={status}>
+                {STATUS_MAP[status]}
+              </option>
+            ))}
+          </Form.Select>
+        </div>
+
+        <div className="col-4">
+          Дата начала
+          <Form.Control
+            type="date"
+            value={dateFrom}
+            placeholder="Дата начала"
+            onChange={(e) => handleDateFromChange(e.target.value)}
+            title="Дата начала формирования заявки"
+          />
+        </div>
+
+        <div className="col-4">
+          Дата окончания
+          <Form.Control
+            type="date"
+            value={dateTo}
+            placeholder="Дата окончания"
+            onChange={(e) => handleDateToChange(e.target.value)}
+            title="Дата окончания формирования заявки"
+          />
+        </div>
+      </div>
 
       <Table bordered hover>
         <thead className="thead-dark">

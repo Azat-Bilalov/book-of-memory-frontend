@@ -3,10 +3,10 @@ import { Header } from "@/widgets/header";
 
 const MainLayout: React.FC = () => {
   return (
-    <div>
+    <>
       <Header />
       <Outlet />
-    </div>
+    </>
   );
 };
 

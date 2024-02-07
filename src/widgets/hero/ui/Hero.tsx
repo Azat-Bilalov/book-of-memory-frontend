@@ -2,10 +2,17 @@ import React from "react";
 
 import s from "./Hero.module.scss";
 import video from "@assets/videos/hero-background.mp4";
+import { Link } from "react-router-dom";
 
-interface Props {}
+export const Hero = () => {
+  React.useEffect(() => {
+    document.body.style.overflow = "hidden";
 
-export const Hero: React.FC<Props> = () => {
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   return (
     <div className={s.hero} id="hero">
       <video
@@ -24,6 +31,20 @@ export const Hero: React.FC<Props> = () => {
           наиболее полную документальную информацию об участниках Великой
           Отечественной войны при помощи новых интерактивных инструментов.
         </p>
+        <div className="d-flex gap-2">
+          <Link
+            to="/book-of-memory-frontend/documents"
+            className="btn btn-outline-light"
+          >
+            Архивные документы
+          </Link>
+          <Link
+            to="/book-of-memory-frontend/bindings"
+            className="btn btn-outline-light"
+          >
+            Сформированные заявки
+          </Link>
+        </div>
       </div>
     </div>
   );

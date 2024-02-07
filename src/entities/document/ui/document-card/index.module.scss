@@ -23,6 +23,24 @@ $p-18: 18px;
     border-radius: 16px;
   }
 
+  &__broken-image {
+    &:before {
+      position: absolute;
+      content: "\01F614    Sorry! The "attr(alt) " image is broken";
+      background-color: #ffffff;
+      font-family: "Poppins", sans-serif;
+      font-size: 0.9em;
+      left: 0;
+      top: 0;
+      width: 100%;
+      padding: 1em 0;
+      text-align: center;
+      border: 3px dashed #afb3e5;
+      box-shadow: 0 0 0 0.45em #ffffff, 0 1.2em 3.6em rgba(1, 7, 60, 0.3);
+      border-radius: 0.2em;
+    }
+  }
+
   &-content {
     display: flex;
     flex-direction: column;

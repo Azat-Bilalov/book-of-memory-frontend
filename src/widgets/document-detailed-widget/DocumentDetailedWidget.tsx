@@ -31,7 +31,7 @@ export const DocumentDetailedWidget = () => {
     <Container className="d-grid gap-4 mb-3" style={{ marginTop: "60px" }}>
       <Breadcrumb
         items={[
-          { text: "Документы", href: "/book-of-memory-frontend/" },
+          { text: "Документы", href: "/book-of-memory-frontend/documents" },
           { text: document.title, active: true },
         ]}
       />

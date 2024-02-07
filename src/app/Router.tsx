@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "@/pages/layout/main";
+import Home from "@/pages/home";
 import DocumentListPage from "@/pages/document-list";
 import DocumentDetailedPage from "@/pages/document-detailed";
 import BindingListPage from "@/pages/binding-list";
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/book-of-memory-frontend",
+        element: <Home />,
+      },
+      {
+        path: "/book-of-memory-frontend/documents",
         element: <DocumentListPage />,
       },
       {

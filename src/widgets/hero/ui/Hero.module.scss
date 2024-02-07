@@ -3,8 +3,9 @@
 }
 
 .hero-video {
+  object-fit: cover;
   width: 100%;
-  z-index: -1;
+  height: 100vh;
   filter: brightness(0.7);
 }
 
@@ -26,4 +27,8 @@
 
 .hero-title {
   font-size: 48px;
+}
+
+.hero-text {
+  font-size: 16px;
 }

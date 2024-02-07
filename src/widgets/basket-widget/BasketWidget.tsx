@@ -28,12 +28,12 @@ export const BasketWidget = () => {
       return;
     }
     dispatch(submitBasket());
-    navigate("/book-of-memory-frontend/");
+    navigate("/book-of-memory-frontend/documents");
   };
 
   const handleDelete = () => {
     dispatch(removeBasket());
-    navigate("/book-of-memory-frontend/");
+    navigate("/book-of-memory-frontend/documents");
   };
 
   const handleDeleteDocumentFromBasket = (id: string) => {
@@ -44,7 +44,7 @@ export const BasketWidget = () => {
     return (
       <Container className="d-grid gap-4 mb-4" style={{ marginTop: "100px" }}>
         <h1 className="h1 text-center">Корзина пуста</h1>
-        <Button onClick={() => navigate("/book-of-memory-frontend")}>
+        <Button onClick={() => navigate("/book-of-memory-frontend/documents")}>
           Вернуться к документам
         </Button>
       </Container>
@@ -63,7 +63,9 @@ export const BasketWidget = () => {
         activeVeteranId={selectedVeteranId || undefined}
       />
 
-      {!enteredBindingId && <Navigate to="/book-of-memory-frontend" />}
+      {!enteredBindingId && (
+        <Navigate to="/book-of-memory-frontend/documents" />
+      )}
 
       <h1 className="h1 text-center">Составление заявки</h1>
       <div className="d-grid d-md-flex justify-content-center gap-3">
@@ -85,7 +87,7 @@ export const BasketWidget = () => {
         </div>
       </div>
 
-      <div className="d-flex justify-content-center gap-3">
+      <div className="d-flex justify-content-center gap-3 mb-3">
         <Button variant="primary" type="submit" onClick={handleSubmit}>
           Оформить заявку
         </Button>
